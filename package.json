@@ -1,0 +1,40 @@
+{
+  "name": "gulp-htmlcpr",
+  "version": "0.0.1",
+  "description": "A gulp task to copy HTML files with all the local assets (images, scripts, style files, etc.) that it needs.",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/PlanitarInc/gulp-htmlcpr.git"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha --reporter spec"
+  },
+  "keywords": [
+    "plntr",
+    "htmlcpr",
+    "gulpplugin"
+  ],
+  "author": {
+    "name": "Planitar",
+    "url": "http://github.com/PlanitarInc"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^1.1.3",
+    "gulp-util": "*",
+    "object-assign": "*",
+    "through2": "^2.0.0"
+  },
+  "devDependencies": {
+    "event-stream": "^3.1.7",
+    "fs-walk": "0.0.1",
+    "gulp": "^3.9.0",
+    "mocha": "*",
+    "sha1": "^1.1.1",
+    "should": "*",
+    "vinyl": "*"
+  }
+}
