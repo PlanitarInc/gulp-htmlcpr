@@ -13,7 +13,7 @@ var _ = require('lodash');
 var htmlcpr = require('../index');
 require('mocha');
 
-const COMPARE_FILE_CONTENT = false;
+var COMPARE_FILE_CONTENT = false;
 
 describe('gulp-htmlcpr', function () {
 
@@ -185,8 +185,8 @@ var runTestCase = function (srcFiles, options, expectedDir, done) {
   });
 
   stream.on('end', function () {
-    let actual = getFileArrSummary(outputFiles);
-    let expected = getDirSummary(expectedDir);
+    var actual = getFileArrSummary(outputFiles);
+    var expected = getDirSummary(expectedDir);
 
     for (var i = 0; i < expected.length; i++) {
       if (COMPARE_FILE_CONTENT) {
