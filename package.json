@@ -1,6 +1,6 @@
 {
   "name": "gulp-htmlcpr",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A gulp task to copy HTML files with all the local assets (images, scripts, style files, etc.) that it needs.",
   "repository": {
     "type": "git",
