@@ -168,12 +168,15 @@ LinkTraverser.prototype.processUrl = function (file, url) {
     return url;
   }
 
-  var referencedPath;
+  var refPathFromBase, refPathFromFile;
   if (strippedPath.charAt(0) === '/') {
+    var inversedFilePath = path.relative(path.dirname(file.relative), '.');
     strippedPath = strippedPath.substr(1, strippedPath.length - 1);
-    referencedPath = path.join(file.base, strippedPath);
+    refPathFromBase = path.join(file.base, strippedPath);
+    refPathFromFile = path.join(inversedFilePath, strippedPath);
   } else {
-    referencedPath = path.join(path.dirname(file.path), strippedPath);
+    refPathFromBase = path.join(path.dirname(file.path), strippedPath);
+    refPathFromFile = strippedPath;
   }
 
   if (this.blacklistFn && this.blacklistFn(url, file.relative)) {
@@ -181,20 +184,20 @@ LinkTraverser.prototype.processUrl = function (file, url) {
     return '';
   }
 
-  this.log('Opening', chalk.yellow(referencedPath), '(' + file.base + ')', '...');
+  this.log('Opening', chalk.yellow(refPathFromBase), '(' + refPathFromFile + ')', '...');
   // XXX find a better way to read a file from FS
   var referencedFile = new File({
     cwd: file.cwd,
     base: file.base,
-    path: referencedPath,
-    contents: fs.readFileSync(referencedPath),
-    stat: fs.statSync(referencedPath),
+    path: refPathFromBase,
+    contents: fs.readFileSync(refPathFromBase),
+    stat: fs.statSync(refPathFromBase),
   });
 
   this.process(referencedFile);
 
-  // Return the relative path in the destination dir.
-  return strippedPath;
+  // Return the relative path from the including file
+  return refPathFromFile;
 };
 
 LinkTraverser.prototype.isExternalPath = function (file) {
