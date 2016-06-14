@@ -191,14 +191,16 @@ var runTestCase = function (srcFiles, options, expectedDir, done) {
     for (var i = 0; i < expected.length; i++) {
       if (COMPARE_FILE_CONTENT) {
         expected[i].__content = expected[i].__content.split('\n');
+      } else {
+        delete expected[i].__content;
       }
-      delete expected[i].__content;
     }
     for (var j = 0; j < actual.length; j++) {
       if (COMPARE_FILE_CONTENT) {
         actual[j].__content = actual[j].__content.split('\n');
+      } else {
+        delete actual[j].__content;
       }
-      delete actual[j].__content;
     }
 
     assert.deepEqual(_.map(actual, 'filepath'), _.map(expected, 'filepath'));
