@@ -70,7 +70,7 @@ function LinkTraverser(options) {
     this.norecDir += '/';
   }
   this.blacklistFn = options.blacklistFn;
-  this.skipFn = options.skipFn;
+  this.processFn = options.processFn;
   this.schemelessUrlFix = options.schemelessUrlFix;
   this.verbose = options.verbose;
   this.files = [];
@@ -169,7 +169,7 @@ LinkTraverser.prototype.processUrl = function (file, url) {
     return url;
   }
 
-  if (this.skipFn && this.skipFn(url, file.relative)) {
+  if (this.processFn && this.processFn(url, file.relative)) {
     this.log('Skipping user-filtered url: ' + chalk.yellow(url) + '...');
     return url;
   }

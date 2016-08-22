@@ -158,21 +158,16 @@ describe('gulp-htmlcpr', function () {
     }, 'test/expected/page_filter_fn', done);
   });
 
-  it('should call the provided skip function', function (done) {
+  it('should call the provided process function', function (done) {
     runTestCase([
-      'test/fixtures/page_skip_fn.html',
+      'test/fixtures/page_process_fn.html',
     ], {
       base: 'test/fixtures',
-      skipFn: function (url, src) {
+      processFn: function (url, src) {
         // Skip processing of blacklist function to prevent replacing urls
-        return src === 'page_skip_fn.html' && url === '/images/almond.jpg';
-      },
-      blacklistFn: function (url, src) {
-        // Exclude 'image/almond.jpg' but only when it is included from
-        // 'page_filter_fn.html'
-        return src === 'page_skip_fn.html' && url === '/images/almond.jpg';
+        return src === 'page_process_fn.html' && url === '/images/almond.jpg';
       }
-    }, 'test/expected/page_skip_fn', done);
+    }, 'test/expected/page_process_fn', done);
   });
 
   it('should hanlde HTML file in a subdir', function (done) {
