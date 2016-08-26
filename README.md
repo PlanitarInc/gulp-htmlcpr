@@ -48,6 +48,21 @@ is the path of the currently processed file.
 If the function returns truthy value the link is replaced with `''`
 and the file referenced by the link is not copied to the destination dir.
 
+#### options.skipFn
+
+Type: `function (url: string, filepath: string): bool`
+
+Default value: `null`
+
+The function is called for every URL detected by the plugin.
+First parameter `url` is the detected URL and the second parameter `src`
+is the path of the currently processed file.
+
+If the function returns truthy value, the link will be skipped. This runs
+prior to `blacklistFn`, so in the case of a url being matched by both, it will
+still be skipped.
+
+
 ### options.schemelessUrlFix
 
 Type: `string|function (url: string, src: string): bool`
