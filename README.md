@@ -17,7 +17,7 @@ npm install --save-dev gulp-htmlcpr
 ```js
 var htmlcpr = require('gulp-htmlcpr');
 
-gulp.src('./src/**/*.yaml')
+gulp.src('./src/index.html')
   .pipe(htmlcpr())
   .pipe(gulp.dest('./dist/'))
 ```
@@ -63,7 +63,7 @@ prior to `blacklistFn`, so in the case of a url being matched by both, it will
 still be skipped.
 
 
-### options.schemelessUrlFix
+#### options.schemelessUrlFix
 
 Type: `string|function (url: string, src: string): bool`
 
