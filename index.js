@@ -174,6 +174,11 @@ LinkTraverser.prototype.processUrl = function (file, url) {
     return url;
   }
 
+  if (this.blacklistFn && this.blacklistFn(url, file.relative)) {
+    this.log('Ignoring user-blacklisted url: ' + chalk.yellow(url) + '...');
+    return '';
+  }
+
   var refPathFromBase, refPathFromFile;
   if (strippedPath.charAt(0) === '/') {
     var inversedFilePath = path.relative(path.dirname(file.relative), '.');
@@ -183,11 +188,6 @@ LinkTraverser.prototype.processUrl = function (file, url) {
   } else {
     refPathFromBase = path.join(path.dirname(file.path), strippedPath);
     refPathFromFile = strippedPath;
-  }
-
-  if (this.blacklistFn && this.blacklistFn(url, file.relative)) {
-    this.log('Ignoring user-blacklisted url: ' + chalk.yellow(url) + '...');
-    return '';
   }
 
   this.log('Opening', chalk.yellow(refPathFromBase), '(' + refPathFromFile + ')', '...');
