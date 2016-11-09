@@ -75,6 +75,28 @@ string, that string is considered to be the protocol and is appended to the URL.
 If the value is the function, that function is being called and the URL is
 replaced with its return value.
 
+#### options.overwritePath
+
+Type: `function (filePathFromBase: string): string`
+
+Default value: `undefined`
+
+The function is used to move some files to new location. For example, if
+all HTML page assets have to moved to a single sub-directory `assets/`,
+then `overwritePath` should be defined as follows:
+
+```js
+  var path = require('path');
+  ...
+  overwritePath: function (src) {
+    return path.join('assets', src);
+  }
+  ...
+```
+
+The emitted files will have the updated path, and the links to these files
+will be updated as well.
+
 ### Usage Examples
 
 #### Basic Use Case

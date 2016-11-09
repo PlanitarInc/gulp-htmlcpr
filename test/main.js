@@ -186,6 +186,19 @@ describe('gulp-htmlcpr', function () {
     }, 'test/expected/page_complex', done);
   });
 
+  it('should respect the provided overwritePath function', function (done) {
+    runTestCase([
+      'test/fixtures/page_complex.html',
+    ], {
+      base: 'test/fixtures',
+      overwritePath: function (newpath, src) {
+        // Put all files in a subdir
+        return path.join('./prefix', newpath);
+      },
+      verbose: true,
+    }, 'test/expected/overwrite_path', done);
+  });
+
 });
 
 var runTestCase = function (srcFiles, options, expectedDir, done) {

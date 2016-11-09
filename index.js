@@ -35,6 +35,11 @@ module.exports = function (options) {
       'blacklistFn should be either a string or a function');
   }
 
+  if (options.overwritePath && typeof options.overwritePath !== 'function') {
+    throw new Error('gulp-htmlcpr: ' +
+      'overwritePath should be a function');
+  }
+
   return through.obj(function (file, enc, cb) {
     if (file.isNull() || file.isDirectory()) {
       return cb();
@@ -72,6 +77,7 @@ function LinkTraverser(options) {
   this.blacklistFn = options.blacklistFn;
   this.skipFn = options.skipFn;
   this.schemelessUrlFix = options.schemelessUrlFix;
+  this.overwritePath = options.overwritePath;
   this.verbose = options.verbose;
   this.files = [];
   this.fileNames = {};
@@ -84,7 +90,7 @@ LinkTraverser.prototype.log = function () {
 };
 
 LinkTraverser.prototype.push = function (file) {
-  var filepath = file.relative;
+  var filepath = file.__newRelativePath || file.relative;
 
   if (filepath in this.fileNames) {
     return;
@@ -196,14 +202,27 @@ LinkTraverser.prototype.processUrl = function (file, url) {
     cwd: file.cwd,
     base: file.base,
     path: refPathFromBase,
+    __newRelativePath: '',
     contents: fs.readFileSync(refPathFromBase),
     stat: fs.statSync(refPathFromBase),
   });
 
+  if (this.overwritePath) {
+    referencedFile.__newRelativePath =
+      this.overwritePath(referencedFile.relative);
+  }
+
   this.process(referencedFile);
 
-  // Return the relative path from the including file
-  return refPathFromFile;
+  // Now after the file is processed, replace it old path
+  // with the new one.
+  if (referencedFile.__newRelativePath) {
+    referencedFile.path = path.join(referencedFile.base,
+      referencedFile.__newRelativePath);
+  }
+
+  return path.relative(path.dirname(file.__newRelativePath || file.relative),
+    referencedFile.__newRelativePath || referencedFile.relative);
 };
 
 LinkTraverser.prototype.isExternalPath = function (file) {
