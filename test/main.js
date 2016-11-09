@@ -195,7 +195,6 @@ describe('gulp-htmlcpr', function () {
         // Put all files in a subdir
         return path.join('./prefix', newpath);
       },
-      verbose: true,
     }, 'test/expected/overwrite_path', done);
   });
 
