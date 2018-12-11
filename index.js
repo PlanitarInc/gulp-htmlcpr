@@ -3,7 +3,6 @@
 var path = require('path');
 var fs = require('fs');
 var through = require('through2');
-var gutil = require('gulp-util');
 var PluginError = require('plugin-error');
 var extend = require('object-assign');
 var File = require('vinyl');
