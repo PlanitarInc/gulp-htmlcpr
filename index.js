@@ -4,11 +4,10 @@ var path = require('path');
 var fs = require('fs');
 var through = require('through2');
 var gutil = require('gulp-util');
+var PluginError = require('plugin-error');
 var extend = require('object-assign');
 var File = require('vinyl');
 var chalk = require('chalk');
-
-var PluginError = gutil.PluginError;
 
 module.exports = function (options) {
   options = extend({

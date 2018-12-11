@@ -24,7 +24,7 @@
   "license": "MIT",
   "peerDependencies": {
     "chalk": "^2.4.1",
-    "gulp-util": "*",
+    "plugin-error": "^1.0.1",
     "object-assign": "*",
     "through2": "^3.0.0",
     "vinyl": "*"
@@ -34,10 +34,10 @@
     "event-stream": "3.3.4",
     "fs-walk": "0.0.2",
     "gulp": "^4.0.0",
-    "gulp-util": "*",
     "lodash": "^4.13.1",
     "mocha": "*",
     "object-assign": "*",
+    "plugin-error": "^1.0.1",
     "sha1": "^1.1.1",
     "should": "*",
     "through2": "^3.0.0",
