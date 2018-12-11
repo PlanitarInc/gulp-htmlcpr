@@ -127,7 +127,7 @@ LinkTraverser.prototype.process = function (file) {
     contents = replaceHtmlUrls(file.contents.toString(), function (url) {
       return this.processUrl(file, url);
     }.bind(this), this);
-    file.contents = new Buffer(contents);
+    file.contents = Buffer.from(contents);
     file.stat.size = contents.length;
 
     this.push(file);
@@ -139,7 +139,7 @@ LinkTraverser.prototype.process = function (file) {
     contents = replaceCssUrls(file.contents.toString(), function (url) {
       return this.processUrl(file, url);
     }.bind(this), this);
-    file.contents = new Buffer(contents);
+    file.contents = Buffer.from(contents);
     file.stat.size = contents.length;
 
     this.push(file);
