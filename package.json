@@ -22,20 +22,25 @@
     "url": "http://github.com/PlanitarInc"
   },
   "license": "MIT",
-  "dependencies": {
-    "chalk": "^1.1.3",
+  "peerDependencies": {
+    "chalk": "^2.4.1",
     "gulp-util": "*",
     "object-assign": "*",
-    "through2": "^2.0.0",
+    "through2": "^3.0.0",
     "vinyl": "*"
   },
   "devDependencies": {
+    "chalk": "^2.4.1",
     "event-stream": "3.3.4",
-    "fs-walk": "0.0.1",
-    "gulp": "^3.9.0",
+    "fs-walk": "0.0.2",
+    "gulp": "^4.0.0",
+    "gulp-util": "*",
     "lodash": "^4.13.1",
     "mocha": "*",
+    "object-assign": "*",
     "sha1": "^1.1.1",
-    "should": "*"
+    "should": "*",
+    "through2": "^3.0.0",
+    "vinyl": "*"
   }
 }
